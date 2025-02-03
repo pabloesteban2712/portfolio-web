@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Acerca de{% endblock %}
+
+{% block background %}{% load static%}{% static 'core/img/aboutme-bg.jpeg' %}{% endblock %}
+
+{% block headers %}
+<h1>Biografia</h1>
+<span class="subheading"></span>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-3 col-md-4 offset-lg-1">
+        <img class="img-fluid avatar" src="{% static 'core/img/avatar-bg.png' %}" alt="">
+    </div>
+    <div class="col-lg-7 col-md-8">
+        <h2 class="section-heading">Hola soy Pablo!</h2>        
+        <p> Me especializo como Backend Developer y Data Analyst. </p>
+        
+        <p>
+        Mi experiencia incluye Python, JavaScript, Django, Pandas, Machine Learning, bases de datos SQL, Power BI, Git...</p>     
+    </div>
+</div>
+{% endblock %}
