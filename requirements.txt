@@ -5,3 +5,4 @@ gunicorn==21.2.0
 sqlparse==0.5.3
 packaging==24.2
 asgiref==3.8.1
+whitenoise==6.8.2
