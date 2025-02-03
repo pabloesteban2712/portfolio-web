@@ -128,4 +128,4 @@ GS_BUCKET_NAME = 'mi-bucket-pabloesteban'
 
 # Media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = f'https://storage.googleapis.com/{'mi-bucket-pabloesteban'}/
+MEDIA_URL = 'https://storage.googleapis.com/mi-bucket-pabloesteban/'
