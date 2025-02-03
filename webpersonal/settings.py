@@ -119,8 +119,8 @@ if not DEBUG:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # GOOGLE CLOUD
-GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    os.path.join(BASE_DIR, 'credentials', 'potent-comfort-449816-c8-83eac3372300.json'))
+GS_CREDENTIALS = service_account.Credentials.from_service_account_info(
+    json.loads(os.getenv('GOOGLE_CREDENTIALS')))
 
 # Configuración de Google Cloud Storage
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
