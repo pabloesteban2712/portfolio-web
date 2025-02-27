@@ -1,17 +1,22 @@
-import os
+import os 
+import json
+from google.oauth2 import service_account
 from pathlib import Path
 
-# Construir rutas dentro del proyecto: BASE_DIR / 'subdir'
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# CLAVE SECRETA (Solo para desarrollo local)
-SECRET_KEY = 'qwertyuiop'
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get('SECRET_KEY', default = 'qwertyuiop')
 
-# DEBUG activado para desarrollo
-DEBUG = True
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = 'RENDER' not in os.environ
 
-# Hosts permitidos
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS =  []
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Definición de aplicaciones instaladas
 INSTALLED_APPS = [
@@ -25,11 +30,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-# Definición del middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # Para desarrollo local no es necesario usar whitenoise
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -85,19 +88,35 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internacionalización
 LANGUAGE_CODE = 'es'
+
 TIME_ZONE = 'UTC'
+
 USE_I18N = True
+
 USE_TZ = True
 
-# Archivos estáticos (CSS, JavaScript, Imágenes)
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR / 'static'),
-    ]
 
-# Campo de clave primaria por defecto
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.1/howto/static-files/
+
+STATIC_URL = '/static/'
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+    STATICFILES_STORAGE ='whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Configuración de archivos multimedia
+# GOOGLE CLOUD
+GS_CREDENTIALS = service_account.Credentials.from_service_account_info(
+    json.loads(os.getenv('GOOGLE_CREDENTIALS')))
+
+# Configuración de Google Cloud Storage
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_BUCKET_NAME = 'mi-bucket-pabloesteban'
+
+# Media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_URL = 'https://storage.googleapis.com/mi-bucket-pabloesteban/'
