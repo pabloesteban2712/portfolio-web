@@ -1,12 +1,13 @@
 from django.shortcuts import render, HttpResponse
+from .models import Projects
 
 html_base = """
-<h1>Mi web personal</h1>
+<h1>My personal web</h1>
 <ul>
-    <li><a href="/">Portada</a></li> 
-    <li><a href="/about-me/">Acerca de</a></li>
-    <li><a href="/portfolio/">Portafolio</a></li>
-    <li><a href="/contact/">Contacto</a></li>
+    <li><a href="/">Home</a></li> 
+    <li><a href="/resume/">Resume</a></li>
+    <li><a href="/projects/">Projects</a></li>
+    <li><a href="/contact/">Contact</a></li>
 </ul>
 """
 
@@ -14,8 +15,13 @@ html_base = """
 def home(request):
     return render(request, "core/home.html")
 
-def about(request):
-   return render(request, "core/about.html")
+def resume(request):
+   return render(request, "core/resume.html")
    
 def contact(request):
     return render(request, "core/contact.html")
+
+# Create your views here.
+def projects(request):
+    projects = Projects.objects.all() 
+    return render(request, "core/projects.html", {'projects': projects })

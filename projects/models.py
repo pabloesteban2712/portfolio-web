@@ -10,7 +10,7 @@ class Projects(models.Model):
     updated = models.DateTimeField (auto_now=True, verbose_name = "Edition date")
 
     class Meta:
-        verbose_name = "projects"
+        verbose_name = "project"
         verbose_name_plural = "projects"
         ordering = ["-created"]
 
