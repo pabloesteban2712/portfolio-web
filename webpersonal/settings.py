@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'webpersonal.wsgi.application'
 
 # Configuración de la base de datos (SQLite para desarrollo local)
 DATABASES = {
-   'default': dj_database_url.config(default=os.getenv("postgresql://postgres:gmxWOcdgAlAKfuBCNgroOFILFsOQwthT@postgres-uvtu.railway.internal:5432/railway", "sqlite:///db.sqlite3")),
+   'default': dj_database_url.config(default=os.getenv("postgresql://postgres:gmxWOcdgAlAKfuBCNgroOFILFsOQwthT@postgres-uvtu.railway.internal:5432/railway")),
     }
 
 # Validadores de contraseña
