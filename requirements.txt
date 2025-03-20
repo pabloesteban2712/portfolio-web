@@ -7,5 +7,6 @@ packaging==24.2
 asgiref==3.8.1
 whitenoise==6.8.2
 django-storages==1.14.4 
+dj-database-url==2.3.0
 google-cloud-storage==3.0.0 
 django-extensions==3.2.3
