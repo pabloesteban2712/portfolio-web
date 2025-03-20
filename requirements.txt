@@ -10,3 +10,4 @@ django-storages==1.14.4
 dj_database-url==2.3.0
 google-cloud-storage==3.0.0 
 django-extensions==3.2.3
+psycopg2-binary==2.9.10
