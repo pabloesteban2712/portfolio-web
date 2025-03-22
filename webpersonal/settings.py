@@ -77,9 +77,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'webpersonal.wsgi.application'
 
 # Configuración de la base de datos (SQLite para desarrollo local)
+
 DATABASES = {
-   'default': dj_database_url.config(default=os.getenv("postgresql://postgres:gmxWOcdgAlAKfuBCNgroOFILFsOQwthT@postgres-uvtu.railway.internal:5432/railway")),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
 
 # Validadores de contraseña
 AUTH_PASSWORD_VALIDATORS = [
@@ -127,10 +131,13 @@ if GOOGLE_CREDENTIALS:
 else:
     GOOGLE_CREDENTIALS = {}
 
+
+"""
 # Configuración de Google Cloud Storage
 DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 GS_BUCKET_NAME = 'mi-bucket-pabloesteban'
 
 # Media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = 'https://storage.googleapis.com/mi-bucket-pabloesteban/'
+MEDIA_URL = 'https://storage.googleapis.com/mi-bucket-pabloesteban/'"
+"""
